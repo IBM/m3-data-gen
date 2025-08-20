@@ -1,0 +1,21 @@
+granite.build:
+  name: multi_turn_granite_build
+  targets:
+    dgt:
+      environment_uri: space://environments/vela1-gb
+      inputs:
+        input_artifact_path:
+          uri: lh://prod/granite_dot_build.public/filesets/fileset_shared/multi_turn_unbalanced_data/20250729T163703
+      outputs:
+        dgt:
+          uri: lh://prod/granite_dot_build.public/filesets/fileset_shared/output_data-{{ run_metadata.targetsteprun_id | short_hash }}/1/
+        dgt_meta:
+          uri: lh://prod/granite_dot_build.public/tables/custom_digit_metadata_{{ run_metadata.targetsteprun_id | short_hash }}
+      steps:
+      - step_uri: git+ssh://github.ibm.com/granite-dot-build/assets.git#subdirectory=steps/custom_code
+        config:
+          custom_code_config:
+            github_url: "github.ibm.com/raavi-gupta/multi-turn-multi-hop"
+            setup_command: 'pip install -r requirements.txt && python -m spacy download en_core_web_sm'
+            start_command: 'python get_api_sequences.py --domain world_development_indicators --mode gb --output_dir $OUTPUT_PATH --input_dir $INPUT_PATH' 
+            dir_to_save: "."

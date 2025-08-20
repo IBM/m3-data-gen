@@ -1,0 +1,21 @@
+granite.build:
+  name: multi_turn_granite_build
+  targets:
+    dgt:
+      environment_uri: space://environments/vela1-gb
+      inputs:
+        input_artifact_path:
+          uri: lh://prod/granite_dot_build.public/filesets/fileset_shared/multi_turn/20250723T165326
+      outputs:
+        dgt:
+          uri: lh://prod/granite_dot_build.public/filesets/fileset_shared/output_data-{{ run_metadata.targetsteprun_id | short_hash }}/1/
+        dgt_meta:
+          uri: lh://prod/granite_dot_build.public/tables/custom_digit_metadata_{{ run_metadata.targetsteprun_id | short_hash }}
+      steps:
+      - step_uri: git+ssh://github.ibm.com/granite-dot-build/assets.git#subdirectory=steps/custom_code
+        config:
+          custom_code_config:
+            github_url: "https://github.ibm.com/AI4BA/agentic-middleware-playground"
+            setup_command: 'git checkout evaluation && cd m3_benchmark && pip install -r requirements.txt && python -m spacy download en_core_web_sm'
+            start_command: 'cd m3_benchmark && chmod +x ./run_parallelized.sh && ./run_parallelized.sh' 
+            dir_to_save: "."
