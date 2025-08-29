@@ -16,6 +16,7 @@ Now you are assistant who generates a description for a document retriever. You 
 1. Use these to generate a coherent descriptions without adding any extra information from your end.
 2. Make the desciption feel like a natural description without using explicit table names.
 3. You are generating the description for domain {db_id}
+4. Please keep the descriptions within 2-3 sentences. These are being used as tool descriptions.
 
 The table names and column descriptions :
 {text}
