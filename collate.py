@@ -82,7 +82,7 @@ def main(domains_path, output_path, save_type, version, balanced):
     # Domains to exclude for personal information
     red_domains=["car_retails", "synthea", "shipping", "cs_semester", "food_inspection_2"
                  , "sales", "software_company", "social_media", "human_resources", "regional_sales"
-                 ,"works_cycle", "retails", "retail_world", "retail_complains", "shooting", "superstore","movie_3"]
+                 ,"works_cycles", "retails", "retail_world", "retail_complains", "shooting", "superstore"]
 
     os.makedirs(f"{output_path}/balanced/", exist_ok=True)
     os.makedirs(f"{output_path}/unbalanced/", exist_ok=True)
